@@ -6,3 +6,4 @@ export * from './investment-calculator.component';
 export * from './how-it-works.component';
 export * from './roadmap-section.component';
 export * from './partnership-section.component';
+export * from './reviews-section.component';
