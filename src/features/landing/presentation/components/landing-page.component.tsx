@@ -7,6 +7,7 @@ import { AboutSection } from "./about-section.component";
 import { InvestmentCalculatorSection } from "./investment-calculator.component";
 import { HowItWorksSection } from "./how-it-works.component";
 import { RoadmapSection } from "./roadmap-section.component";
+import { PartnershipSection } from "./partnership-section.component";
 
 const LandingPage = () => {
 	const pageContentWrapperRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,7 @@ const LandingPage = () => {
 			<InvestmentCalculatorSection />
 			<HowItWorksSection />
 			<RoadmapSection />
+			<PartnershipSection />
 		</div>
 	);
 };
