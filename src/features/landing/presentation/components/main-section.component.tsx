@@ -8,7 +8,7 @@ export const MainSection = () => {
 	return (
 		<section
 			id={LandingSections.aboutProject.id}
-			className="section-anchor w-full border-b border-border-color bg-background-dark pt-32 sm:pt-40"
+			className="w-full border-b border-border-color bg-background-dark pt-32 sm:pt-40"
 		>
 			<div className="container mx-auto flex max-w-screen-xl flex-col items-center gap-16 px-4 lg:flex-row lg:gap-8">
 				<div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">

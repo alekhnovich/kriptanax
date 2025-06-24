@@ -1,8 +1,11 @@
-import { howItWorksData } from '../../constants';
+import { howItWorksData, LandingSections } from '../../constants';
 
 export const HowItWorksSection = () => {
 	return (
-		<section className="relative w-full overflow-hidden bg-background-light py-20 sm:py-28">
+		<section
+			id={LandingSections.howItWorks.id}
+			className="relative w-full overflow-hidden bg-background-light py-20 sm:py-28"
+		>
 			<div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 opacity-20">
 				<div className="absolute left-1/4 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-purple opacity-30 blur-[150px]"></div>
 				<div className="absolute right-1/4 top-1/2 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-brand-blue opacity-30 blur-[150px]"></div>

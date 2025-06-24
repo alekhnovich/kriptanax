@@ -1,8 +1,12 @@
+import { LandingSections } from '../../constants';
 import { aboutSectionData } from '../../constants/about.constants';
 
 export const AboutSection = () => {
 	return (
-		<section className="section-anchor relative w-full overflow-hidden bg-background-dark py-20 sm:py-28">
+		<section
+			id={LandingSections.aboutUs.id}
+			className="section-anchor relative w-full overflow-hidden bg-background-dark py-20 sm:py-28"
+		>
 			<div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
 				<div className="absolute left-0 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-brand-blue opacity-15 blur-[120px]"></div>
 				<div className="absolute right-0 top-1/2 h-[500px] w-[500px] translate-x-1/2 rounded-full bg-brand-purple opacity-15 blur-[120px]"></div>

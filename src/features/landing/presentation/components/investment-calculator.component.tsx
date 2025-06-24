@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatedNumber } from '../../../../core/presentation';
+import { LandingSections } from '../../constants';
 
 const MIN_INVESTMENT = 20;
 const MAX_INVESTMENT = 100000;
@@ -39,7 +40,10 @@ export const InvestmentCalculatorSection = () => {
 	};
 
 	return (
-		<section className="w-full bg-background-dark py-20 sm:py-28">
+		<section
+			id={LandingSections.incomeCalculator.id}
+			className="w-full bg-background-dark py-20 sm:py-28"
+		>
 			<div className="container mx-auto max-w-screen-lg px-4">
 				<div className="mx-auto max-w-3xl text-center">
 					<h2 className="text-4xl font-extrabold text-text-primary sm:text-5xl">

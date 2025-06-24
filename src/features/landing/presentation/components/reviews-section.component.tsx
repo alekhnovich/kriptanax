@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { CarouselNextButton, CarouselPrevButton } from '../../../../core/presentation';
+import { LandingSections } from '../../constants';
 
 const screenshots = [
 	{ id: 1, url: '#' },
@@ -40,7 +41,7 @@ export const ReviewsSection = () => {
 	};
 
 	return (
-		<section className="w-full bg-background-dark py-20 sm:py-28">
+		<section id={LandingSections.reviews.id} className="w-full bg-background-dark py-20 sm:py-28">
 			<div className="container mx-auto max-w-screen-xl px-4">
 				<div className="mx-auto max-w-3xl text-center">
 					<h2 className="text-4xl font-extrabold text-text-primary sm:text-5xl">

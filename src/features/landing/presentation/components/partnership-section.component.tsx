@@ -1,6 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
-import { partnershipData } from '../../constants';
+import { LandingSections, partnershipData } from '../../constants';
 
 const draw: Variants = {
 	hidden: { pathLength: 0, opacity: 0 },
@@ -36,7 +36,10 @@ export const PartnershipSection = () => {
 	};
 
 	return (
-		<section className="w-full overflow-hidden bg-background-light py-20 sm:py-28">
+		<section
+			id={LandingSections.partnershipProgram.id}
+			className="w-full overflow-hidden bg-background-light py-20 sm:py-28"
+		>
 			<div className="container mx-auto grid max-w-screen-xl items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
 				<div className="flex items-center justify-center">
 					<motion.svg
