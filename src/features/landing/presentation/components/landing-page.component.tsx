@@ -5,6 +5,8 @@ import { LandingSections } from "../../constants";
 import { MainSection } from "./main-section.component";
 import { AboutSection } from "./about-section.component";
 import { InvestmentCalculatorSection } from "./investment-calculator.component";
+import { HowItWorksSection } from "./how-it-works.component";
+import { RoadmapSection } from "./roadmap-section.component";
 
 const LandingPage = () => {
 	const pageContentWrapperRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,8 @@ const LandingPage = () => {
 			<MainSection />
 			<AboutSection />
 			<InvestmentCalculatorSection />
+			<HowItWorksSection />
+			<RoadmapSection />
 		</div>
 	);
 };
