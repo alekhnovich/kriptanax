@@ -3,68 +3,70 @@
 @tailwind utilities;
 
 .range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: #388BFD;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid #E6EDF3;
-  margin-top: -7px;
-  transition: transform 0.2s ease-in-out;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background: #388bfd;
+	cursor: pointer;
+	border-radius: 50%;
+	border: 2px solid #e6edf3;
+	margin-top: -7px;
+	transition: transform 0.2s ease-in-out;
 }
 
 .range-slider:hover::-webkit-slider-thumb {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .range-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #388BFD;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid #E6EDF3; 
+	width: 20px;
+	height: 20px;
+	background: #388bfd;
+	cursor: pointer;
+	border-radius: 50%;
+	border: 2px solid #e6edf3;
 }
 
 .range-slider:hover::-moz-range-thumb {
-  transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .calculator-glow {
-  position: relative;
-  z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 .calculator-glow::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(135deg, #388BFD, #A371F7); 
-  filter: blur(30px); 
-  opacity: 0.25;
-  transition: opacity 0.3s ease-in-out;
-  border-radius: 1rem;
+	content: '';
+	position: absolute;
+	z-index: -1;
+	top: -5px;
+	left: -5px;
+	right: -5px;
+	bottom: -5px;
+	background: linear-gradient(135deg, #388bfd, #a371f7);
+	filter: blur(30px);
+	opacity: 0.25;
+	transition: opacity 0.3s ease-in-out;
+	border-radius: 1rem;
 }
 
 .calculator-glow:hover::before {
-  opacity: 0.4;
+	opacity: 0.4;
 }
 
 .roadmap-gradient-line {
-  background: linear-gradient(
-    to bottom, 
-    #A371F7,
-    #388BFD,
-    rgba(56, 139, 253, 0)
-  );
+	background: linear-gradient(to bottom, #a371f7, #388bfd, rgba(56, 139, 253, 0));
 }
 
-.embla { overflow: hidden; }
-.embla__container { display: flex; }
-.embla__slide { flex: 0 0 100%; min-width: 0; }
+.embla {
+	overflow: hidden;
+}
+.embla__container {
+	display: flex;
+}
+.embla__slide {
+	flex: 0 0 100%;
+	min-width: 0;
+}

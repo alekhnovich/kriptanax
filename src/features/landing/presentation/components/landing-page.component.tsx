@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
-import { APP_ROUTES, useAppNavigate } from "../../../../core";
-import { LandingSections } from "../../constants";
-import { MainSection } from "./main-section.component";
-import { AboutSection } from "./about-section.component";
-import { InvestmentCalculatorSection } from "./investment-calculator.component";
-import { HowItWorksSection } from "./how-it-works.component";
-import { RoadmapSection } from "./roadmap-section.component";
-import { PartnershipSection } from "./partnership-section.component";
-import { ReviewsSection } from "./reviews-section.component";
+import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { APP_ROUTES, useAppNavigate } from '../../../../core';
+import { LandingSections } from '../../constants';
+import { AboutSection } from './about-section.component';
+import { HowItWorksSection } from './how-it-works.component';
+import { InvestmentCalculatorSection } from './investment-calculator.component';
+import { MainSection } from './main-section.component';
+import { PartnershipSection } from './partnership-section.component';
+import { ReviewsSection } from './reviews-section.component';
+import { RoadmapSection } from './roadmap-section.component';
 
 const LandingPage = () => {
 	const pageContentWrapperRef = useRef<HTMLDivElement>(null);

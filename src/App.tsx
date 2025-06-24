@@ -5,14 +5,14 @@ import { AppRouter } from './router';
 export const App = () => {
 	return (
 		<BrowserRouter>
-				<AppRouter />
-				<Toaster
-					richColors
-					closeButton
-					toastOptions={{
-						duration: 5000,
-					}}
-				/>
+			<AppRouter />
+			<Toaster
+				richColors
+				closeButton
+				toastOptions={{
+					duration: 5000,
+				}}
+			/>
 		</BrowserRouter>
 	);
 };
