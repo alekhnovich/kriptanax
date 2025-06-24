@@ -17,7 +17,7 @@ const LandingPage = () => {
 	const sectionId = search.get('sectionId');
 
 	useEffect(() => {
-		if (sectionId && sectionId !== LandingSections.aboutProject.id) {
+		if (sectionId) {
 			pageContentWrapperRef.current
 				?.querySelector(`#${sectionId}`)
 				?.scrollIntoView({ behavior: 'smooth' });
