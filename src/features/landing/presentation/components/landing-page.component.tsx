@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { APP_ROUTES, useAppNavigate } from '../../../../core';
-import { LandingSections } from '../../constants';
 import { AboutSection } from './about-section.component';
 import { HowItWorksSection } from './how-it-works.component';
 import { InvestmentCalculatorSection } from './investment-calculator.component';
@@ -12,20 +10,33 @@ import { RoadmapSection } from './roadmap-section.component';
 
 const LandingPage = () => {
 	const pageContentWrapperRef = useRef<HTMLDivElement>(null);
-	const [search, setSearch] = useSearchParams();
-	const navigate = useAppNavigate();
-	const sectionId = search.get('sectionId');
+	const [, setSearch] = useSearchParams();
 
 	useEffect(() => {
-		if (sectionId) {
-			pageContentWrapperRef.current
-				?.querySelector(`#${sectionId}`)
-				?.scrollIntoView({ behavior: 'smooth' });
-		} else if (sectionId === LandingSections.chart.id) {
-			setSearch({});
-			navigate(`${APP_ROUTES.chart.route}`);
+		const options = {
+			root: null,
+			rootMargin: '-40% 0px -40% 0px',
+			threshold: 0,
+		};
+		const observerCallback: IntersectionObserverCallback = (entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setSearch({ sectionId: entry.target.id }, { replace: true });
+				}
+			});
+		};
+		const observer = new IntersectionObserver(observerCallback, options);
+		const sections = pageContentWrapperRef.current?.querySelectorAll('section[id]');
+		if (sections) {
+			sections.forEach((section) => observer.observe(section));
 		}
-	}, [navigate, sectionId, setSearch]);
+		return () => {
+			if (sections) {
+				sections.forEach((section) => observer.unobserve(section));
+			}
+			observer.disconnect();
+		};
+	}, [setSearch]);
 
 	return (
 		<div
