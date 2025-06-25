@@ -1,291 +1,39 @@
-import { motion } from 'framer-motion';
-import { useLayoutEffect, useRef, useState } from 'react';
-
-// amCharts 5 Imports
-import * as am5 from '@amcharts/amcharts5';
-import * as am5hierarchy from '@amcharts/amcharts5/hierarchy';
-import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
-
-// Ваши импорты данных и типов
+import { motion, type Variants } from 'framer-motion';
+import { useState } from 'react';
 import { LandingSections, partnershipData } from '../../constants';
-import type { PartnershipNodeData } from '../../types';
 
-// Функция-хелпер (без изменений)
-const transformDataForAmCharts = (data: typeof partnershipData): PartnershipNodeData => {
-	const levels = data.levels;
-
-	return {
-		id: 'you',
-		name: 'Вы',
-		color: '#58A6FF',
-		level: 0,
-		value: 35,
-		children: [
-			{
-				id: 'level-1',
-				name: `${levels[0].percentage}%`,
-				color: levels[0].color,
-				level: 1,
-				value: 32,
-				children: [
-					{
-						id: 'branch-left',
-						name: '',
-						color: 'transparent',
-						level: -1,
-						value: 0,
-						children: [
-							{
-								id: 'level-2-a',
-								name: `${levels[1].percentage}%`,
-								color: levels[1].color,
-								level: 2,
-								value: 32,
-								children: [
-									{
-										id: 'level-3-a',
-										name: `${levels[2].percentage}%`,
-										color: levels[2].color,
-										level: 3,
-										value: 32,
-										children: [
-											{
-												id: 'level-4-a',
-												name: `${levels[3].percentage}%`,
-												color: levels[3].color,
-												level: 4,
-												value: 32,
-												children: [
-													{
-														id: 'level-5-a',
-														name: `${levels[4].percentage}%`,
-														color: levels[4].color,
-														level: 5,
-														value: 28,
-														children: [
-															{
-																id: 'level-6-a',
-																name: `${levels[5].percentage}%`,
-																color: levels[5].color,
-																level: 6,
-																value: 24,
-																children: [
-																	{
-																		id: 'level-7-a',
-																		name: `${levels[6].percentage}%`,
-																		color: levels[6].color,
-																		level: 7,
-																		value: 20,
-																	},
-																],
-															},
-														],
-													},
-												],
-											},
-										],
-									},
-								],
-							},
-						],
-					},
-					{
-						id: 'branch-right',
-						name: '',
-						color: 'transparent',
-						level: -1,
-						value: 0,
-						children: [
-							{
-								id: 'level-2-b',
-								name: `${levels[1].percentage}%`,
-								color: levels[1].color,
-								level: 2,
-								value: 32,
-								children: [
-									{
-										id: 'level-3-b',
-										name: `${levels[2].percentage}%`,
-										color: levels[2].color,
-										level: 3,
-										value: 32,
-										children: [
-											{
-												id: 'level-4-b',
-												name: `${levels[3].percentage}%`,
-												color: levels[3].color,
-												level: 4,
-												value: 32,
-												children: [
-													{
-														id: 'level-5-b',
-														name: `${levels[4].percentage}%`,
-														color: levels[4].color,
-														level: 5,
-														value: 28,
-														children: [
-															{
-																id: 'level-6-b',
-																name: `${levels[5].percentage}%`,
-																color: levels[5].color,
-																level: 6,
-																value: 24,
-																children: [
-																	{
-																		id: 'level-7-b',
-																		name: `${levels[6].percentage}%`,
-																		color: levels[6].color,
-																		level: 7,
-																		value: 20,
-																	},
-																],
-															},
-														],
-													},
-												],
-											},
-										],
-									},
-								],
-							},
-						],
-					},
-				],
-			},
-		],
-	};
+const draw: Variants = {
+	hidden: { pathLength: 0, opacity: 0 },
+	visible: (i: number) => ({
+		pathLength: 1,
+		opacity: 1,
+		transition: {
+			pathLength: { delay: i * 0.1, duration: 0.9, ease: 'easeOut' },
+			opacity: { delay: i * 0.1, duration: 0.01 },
+		},
+	}),
 };
 
-export const PartnershipSectionAmCharts = () => {
+const pop: Variants = {
+	hidden: { scale: 0, opacity: 0 },
+	visible: (i: number) => ({
+		scale: 1,
+		opacity: 1,
+		transition: {
+			delay: 0.2 + i * 0.1,
+			type: 'spring',
+			stiffness: 150,
+			damping: 12,
+		},
+	}),
+};
+
+export const PartnershipSection = () => {
 	const [hoveredLevel, setHoveredLevel] = useState<number | null>(null);
-	const chartRef = useRef<am5hierarchy.Tree | null>(null);
 
 	const handleGoToBot = () => {
 		window.open('https://t.me/bot_username', '_blank');
 	};
-
-	useLayoutEffect(() => {
-		const root = am5.Root.new('chartdiv');
-		root._logo?.dispose();
-		root.setThemes([am5themes_Animated.new(root)]);
-
-		const container = root.container.children.push(
-			am5.Container.new(root, {
-				width: am5.percent(100),
-				height: am5.percent(100),
-				layout: root.verticalLayout,
-			}),
-		);
-
-		const series = container.children.push(
-			am5hierarchy.Tree.new(root, {
-				valueField: 'value',
-				categoryField: 'name',
-				childDataField: 'children',
-				orientation: 'vertical',
-				downDepth: 2,
-				initialDepth: 10,
-				paddingTop: 40,
-				paddingBottom: 20,
-			}),
-		);
-
-		// --- ИСПРАВЛЕНИЕ 1: Используем тип TreeLayout из 'am5', а не 'am5hierarchy' ---
-		const layout = series.get('layout');
-		if (layout) {
-			(layout as am5.TreeLayout).set('levelDistance', 40);
-		}
-
-		chartRef.current = series;
-
-		series.nodes.template.setAll({
-			tooltipText: '',
-			draggable: false,
-			cursorOverStyle: 'pointer',
-		});
-
-		series.nodes.template.setup = (target) => {
-			target.set(
-				'background',
-				am5.Circle.new(root, {
-					fill: am5.color('#161B22'),
-					strokeWidth: 2.5,
-				}),
-			);
-
-			target.adapters.add('background', (background, target) => {
-				const dataContext = target.dataItem?.dataContext as PartnershipNodeData | undefined;
-				if (background instanceof am5.Circle && dataContext) {
-					background.setAll({
-						stroke: am5.color(dataContext.color),
-						radius: dataContext.value,
-					});
-				}
-				return background;
-			});
-		};
-
-		series.labels.template.setAll({
-			fill: am5.color('#E6EDF3'),
-			fontSize: 18,
-			fontWeight: 'bold',
-			dy: 2,
-		});
-
-		series.labels.template.adapters.add('fontSize', (fontSize, target) => {
-			const radius = (target.dataItem?.dataContext as PartnershipNodeData | undefined)?.value ?? 0;
-			if (radius < 25) return 11;
-			if (radius < 28) return 13;
-			if (radius < 32) return 16;
-			return 18;
-		});
-
-		// --- ИСПРАВЛЕНИЕ 2: Используем тип ILinkDataItem из 'am5', а не 'am5hierarchy' ---
-		series.links.template.adapters.add('stroke', (stroke, target) => {
-			const linkDataItem = target.dataItem as am5.DataItem<am5.ILinkDataItem>;
-			const targetNode = linkDataItem?.get('target');
-			const color = (targetNode?.dataItem?.dataContext as PartnershipNodeData | undefined)?.color;
-			return color ? am5.color(color) : stroke;
-		});
-
-		series.links.template.adapters.add('strokeWidth', (strokeWidth, target) => {
-			const linkDataItem = target.dataItem as am5.DataItem<am5.ILinkDataItem>;
-			const targetNode = linkDataItem?.get('target');
-			const level =
-				(targetNode?.dataItem?.dataContext as PartnershipNodeData | undefined)?.level ?? 0;
-			if (level > 5) return 1.5;
-			if (level > 4) return 2;
-			return 2.5;
-		});
-
-		const chartData = transformDataForAmCharts(partnershipData);
-		series.data.setAll([chartData]);
-		series.set('selectedDataItem', series.dataItems[0]);
-
-		return () => {
-			root.dispose();
-		};
-	}, []);
-
-	useLayoutEffect(() => {
-		const series = chartRef.current;
-		if (!series) return;
-
-		series.nodes.each((node) => {
-			if (node.dataItem) {
-				const dataContext = node.dataItem.dataContext as PartnershipNodeData | undefined;
-				const isHovered =
-					dataContext && dataContext.level > 0 && dataContext.level === hoveredLevel;
-
-				node.animate({
-					key: 'scale',
-					to: isHovered ? 1.15 : 1,
-					duration: 300,
-					easing: am5.ease.out(am5.ease.cubic),
-				});
-			}
-		});
-	}, [hoveredLevel]);
 
 	return (
 		<section
@@ -293,7 +41,316 @@ export const PartnershipSectionAmCharts = () => {
 			className="w-full overflow-hidden bg-background-light py-20 sm:py-28"
 		>
 			<div className="container mx-auto grid max-w-screen-xl items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
-				<div id="chartdiv" style={{ width: '100%', height: '600px' }}></div>
+				<div className="flex items-center justify-center">
+					<motion.svg
+						width="100%"
+						viewBox="0 0 500 600"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.5 }}
+					>
+						<motion.path
+							d="M250 75 V 98"
+							stroke={partnershipData.levels[0].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={0}
+						/>
+						<motion.path
+							d="M180 200 C 205 165, 295 165, 320 200"
+							stroke={partnershipData.levels[1].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={1}
+						/>
+						<motion.path
+							d="M250 162 V 175"
+							stroke={partnershipData.levels[1].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={1}
+						/>
+						<motion.path
+							d="M180 232 V 258"
+							stroke={partnershipData.levels[2].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={2}
+						/>
+						<motion.path
+							d="M320 232 V 258"
+							stroke={partnershipData.levels[2].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={2}
+						/>
+						<motion.path
+							d="M180 322 V 348"
+							stroke={partnershipData.levels[3].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={3}
+						/>
+						<motion.path
+							d="M320 322 V 348"
+							stroke={partnershipData.levels[3].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={3}
+						/>
+						<motion.path
+							d="M180 412 L 180 423"
+							stroke={partnershipData.levels[4].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={4}
+						/>
+						<motion.path
+							d="M320 412 L 320 423"
+							stroke={partnershipData.levels[4].color}
+							strokeWidth="3"
+							variants={draw}
+							custom={4}
+						/>
+						<motion.path
+							d="M180 412 L 120 454"
+							stroke={partnershipData.levels[5].color}
+							strokeWidth="2.5"
+							variants={draw}
+							custom={5}
+						/>
+						<motion.path
+							d="M320 412 L 380 454"
+							stroke={partnershipData.levels[5].color}
+							strokeWidth="2.5"
+							variants={draw}
+							custom={5}
+						/>
+						<motion.path
+							d="M180 412 L 60 483"
+							stroke={partnershipData.levels[6].color}
+							strokeWidth="2"
+							variants={draw}
+							custom={6}
+						/>
+						<motion.path
+							d="M320 412 L 440 483"
+							stroke={partnershipData.levels[6].color}
+							strokeWidth="2"
+							variants={draw}
+							custom={6}
+						/>
+
+						<motion.g variants={pop} custom={0}>
+							<circle cx="250" cy="40" r="35" fill="#161B22" stroke="#388BFD" strokeWidth="3" />
+							<text
+								x="250"
+								y="46"
+								textAnchor="middle"
+								fill="#E6EDF3"
+								fontSize="22"
+								fontWeight="bold"
+							>
+								Вы
+							</text>
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={1}
+							animate={{ scale: hoveredLevel === 1 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							<circle
+								cx="250"
+								cy="130"
+								r="32"
+								fill="#161B22"
+								stroke={partnershipData.levels[0].color}
+								strokeWidth="2.5"
+							/>
+							<text x="250" y="136" textAnchor="middle" fill="#FFF" fontSize="18" fontWeight="bold">
+								7%
+							</text>
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={2}
+							animate={{ scale: hoveredLevel === 2 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[180, 320].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="200"
+										r="32"
+										fill="#161B22"
+										stroke={partnershipData.levels[1].color}
+										strokeWidth="2.5"
+									/>
+									<text
+										x={cx}
+										y="206"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="18"
+										fontWeight="bold"
+									>
+										5%
+									</text>
+								</g>
+							))}
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={3}
+							animate={{ scale: hoveredLevel === 3 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[180, 320].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="290"
+										r="32"
+										fill="#161B22"
+										stroke={partnershipData.levels[2].color}
+										strokeWidth="2.5"
+									/>
+									<text
+										x={cx}
+										y="296"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="18"
+										fontWeight="bold"
+									>
+										3%
+									</text>
+								</g>
+							))}
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={4}
+							animate={{ scale: hoveredLevel === 4 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[180, 320].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="380"
+										r="32"
+										fill="#161B22"
+										stroke={partnershipData.levels[3].color}
+										strokeWidth="2.5"
+									/>
+									<text
+										x={cx}
+										y="386"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="18"
+										fontWeight="bold"
+									>
+										2%
+									</text>
+								</g>
+							))}
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={5}
+							animate={{ scale: hoveredLevel === 5 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[180, 320].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="455"
+										r="28"
+										fill="#161B22"
+										stroke={partnershipData.levels[4].color}
+										strokeWidth="2.5"
+									/>
+									<text
+										x={cx}
+										y="460"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="16"
+										fontWeight="bold"
+									>
+										1%
+									</text>
+								</g>
+							))}
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={6}
+							animate={{ scale: hoveredLevel === 6 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[120, 380].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="480"
+										r="24"
+										fill="#161B22"
+										stroke={partnershipData.levels[5].color}
+										strokeWidth="2"
+									/>
+									<text
+										x={cx}
+										y="485"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="13"
+										fontWeight="bold"
+									>
+										0.5%
+									</text>
+								</g>
+							))}
+						</motion.g>
+						<motion.g
+							variants={pop}
+							custom={7}
+							animate={{ scale: hoveredLevel === 7 ? 1.15 : 1 }}
+							transition={{ type: 'spring', stiffness: 300 }}
+						>
+							{[60, 440].map((cx) => (
+								<g key={cx}>
+									<circle
+										cx={cx}
+										cy="505"
+										r="20"
+										fill="#161B22"
+										stroke={partnershipData.levels[6].color}
+										strokeWidth="1.5"
+									/>
+									<text
+										x={cx}
+										y="509"
+										textAnchor="middle"
+										fill="#FFF"
+										fontSize="11"
+										fontWeight="bold"
+									>
+										0.1%
+									</text>
+								</g>
+							))}
+						</motion.g>
+					</motion.svg>
+				</div>
+
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -301,8 +358,8 @@ export const PartnershipSectionAmCharts = () => {
 					transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
 				>
 					<h2 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
-						{partnershipData.title}{' '}
-						<span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
+						{partnershipData.title}:{' '}
+						<span className="bg-gradient-to-r from-brand-blue to-brand-purple bg-clip-text text-transparent">
 							{partnershipData.highlightedTitle}
 						</span>
 					</h2>
@@ -332,7 +389,7 @@ export const PartnershipSectionAmCharts = () => {
 					<div className="mt-10">
 						<button
 							onClick={handleGoToBot}
-							className="transform rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+							className="transform rounded-lg bg-brand-blue px-8 py-4 text-lg font-semibold text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-opacity-50"
 						>
 							{partnershipData.buttonText}
 						</button>
