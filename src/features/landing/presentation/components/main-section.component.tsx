@@ -1,8 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import { APP_ROUTES } from '../../../../core';
 import { LandingSections } from '../../constants';
 
 export const MainSection = () => {
+	const navigate = useNavigate();
+
 	const handleGoToBot = () => {
 		window.open('https://t.me/bot_username', '_blank');
+	};
+	const handleGoToChart = () => {
+		navigate(APP_ROUTES.chart.route);
 	};
 
 	return (
@@ -37,7 +44,10 @@ export const MainSection = () => {
 						>
 							Получить прибыль
 						</button>
-						<button className="flex items-center gap-3 rounded-lg border-2 border-border-color bg-background-light px-6 py-4 text-lg font-semibold text-text-primary transition-colors duration-200 hover:border-gray-600 hover:bg-gray-800 focus:outline-none">
+						<button
+							onClick={handleGoToChart}
+							className="flex items-center gap-3 rounded-lg border-2 border-border-color bg-background-light px-6 py-4 text-lg font-semibold text-text-primary transition-colors duration-200 hover:border-gray-600 hover:bg-gray-800 focus:outline-none"
+						>
 							<span className="relative flex h-3 w-3">
 								<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
 								<span className="relative inline-flex h-3 w-3 rounded-full bg-red-500"></span>
