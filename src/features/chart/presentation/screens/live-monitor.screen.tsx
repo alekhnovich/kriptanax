@@ -2,36 +2,8 @@ import { motion, type Variants } from 'framer-motion';
 import type { UTCTimestamp } from 'lightweight-charts';
 import { useEffect, useState } from 'react';
 import { FaArrowTrendUp } from 'react-icons/fa6';
+import type { ApiResponse, StatsData } from '../../types';
 import { AssetInfo, StatCard, TradingChart, type ChartData, type MarkerData } from '../components';
-
-interface ApiKlineData extends Array<string | number> {
-	0: number;
-	1: number;
-	2: number;
-	3: number;
-	4: number;
-}
-
-interface ProfitableTrade {
-	buyOpenTime: number;
-	sellOpenTime: number;
-	buyPrice: number;
-	sellPrice: number;
-}
-
-interface ApiResponse {
-	exchange: string;
-	symbol: string;
-	klines: ApiKlineData[];
-	profitableTradeOpportunities: ProfitableTrade[];
-}
-
-interface StatsData {
-	earnedToday: number;
-	earnedWeek: number;
-	earnedTotal: number;
-	avgProfit30d: number;
-}
 
 export const LiveMonitorPage = () => {
 	const [exchange, setExchange] = useState<string>('');
