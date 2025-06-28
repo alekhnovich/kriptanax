@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AboutSection } from './about-section.component';
+import { FaqSection } from './faq-section.component';
 import { HowItWorksSection } from './how-it-works.component';
 import { InvestmentCalculatorSection } from './investment-calculator.component';
 import { MainSection } from './main-section.component';
 import { PartnershipSection } from './partnership-section.component';
-import { ReviewsSection } from './reviews-section.component';
 import { RoadmapSection } from './roadmap-section.component';
 
 const LandingPage = () => {
@@ -49,7 +49,7 @@ const LandingPage = () => {
 			<HowItWorksSection />
 			<RoadmapSection />
 			<PartnershipSection />
-			<ReviewsSection />
+			<FaqSection />
 		</div>
 	);
 };

@@ -132,3 +132,58 @@
 		transform: translateY(0px) scale(1);
 	}
 }
+
+.aurora-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.aurora-layer::before,
+.aurora-layer::after {
+	content: '';
+	position: absolute;
+	width: 60vw;
+	height: 60vw;
+	max-width: 600px;
+	max-height: 600px;
+	border-radius: 50%;
+	filter: blur(90px);
+	opacity: 0.3;
+}
+
+.aurora-layer::before {
+	top: -10%;
+	left: -20%;
+	background: radial-gradient(circle, #a855f7, transparent 70%);
+	animation: aurora-1 25s infinite alternate;
+}
+
+.aurora-layer::after {
+	bottom: -10%;
+	right: -20%;
+	background: radial-gradient(circle, #4a69ff, transparent 70%);
+	animation: aurora-2 30s infinite alternate;
+}
+
+@keyframes aurora-1 {
+	from {
+		transform: translate(-20%, -10%) rotate(0deg);
+	}
+	to {
+		transform: translate(20%, 10%) rotate(40deg);
+	}
+}
+
+@keyframes aurora-2 {
+	from {
+		transform: translate(15%, 10%) rotate(0deg);
+	}
+	to {
+		transform: translate(-15%, -10%) rotate(-40deg);
+	}
+}

@@ -1,4 +1,6 @@
 export * from './about-section.component';
+export * from './faq-item.component';
+export * from './faq-section.component';
 export * from './how-it-works.component';
 export * from './investment-calculator.component';
 export * from './landing-page.component';
