@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { AnimatedSection } from '../../../home';
-import { faqData } from '../../types';
-import { FaqItem } from './faq-item.component';
+import { AnimatedSection } from '../../../../home';
+import { faqData } from '../../../types';
+import { FaqItem } from '../faq-item.component';
 
 export const FaqSection = () => {
 	const [expandedIndex, setExpandedIndex] = useState<number | null>(null);

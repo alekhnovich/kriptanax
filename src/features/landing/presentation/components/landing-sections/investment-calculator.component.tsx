@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { AnimatedNumber } from '../../../../core/presentation';
-import { AnimatedSection } from '../../../home';
-import { LandingSections } from '../../constants';
+import { AnimatedNumber } from '../../../../../core/presentation';
+import { AnimatedSection } from '../../../../home';
+import { LandingSections } from '../../../constants';
 
 const MIN_INVESTMENT = 20;
 const MAX_INVESTMENT = 100000;

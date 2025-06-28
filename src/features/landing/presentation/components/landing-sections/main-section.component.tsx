@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { APP_ROUTES } from '../../../../core';
-import { AnimatedSection } from '../../../home';
-import { LandingSections } from '../../constants';
+import { APP_ROUTES } from '../../../../../core';
+import { AnimatedSection } from '../../../../home';
+import { LandingSections } from '../../../constants';
+import { NeuralSphereAnimation } from '../main-animation';
 
 export const MainSection = () => {
 	const navigate = useNavigate();
@@ -16,28 +17,25 @@ export const MainSection = () => {
 	return (
 		<AnimatedSection
 			id={LandingSections.aboutProject.id}
-			className="w-full bg-background-dark pt-32 sm:pt-40"
+			className="w-full bg-background-dark pt-[90px]"
 		>
-			<div className="container mx-auto flex max-w-screen-xl flex-col items-center gap-16 px-4 lg:flex-row lg:gap-8">
-				<div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
+			<div className="container mx-auto flex max-w-6xl flex-col items-center gap-[30px] px-4 lg:flex-row lg:items-center lg:justify-center lg:gap-10">
+				<div className="flex flex-col items-center text-center lg:items-start lg:text-left">
 					<div className="mb-4 flex items-center gap-4">
-						<div className="h-14 w-14 rounded-lg bg-background-light">Логотип</div>
-						<h2 className="text-3xl font-bold text-text-primary">Название проекта</h2>
+						<div className="h-14 w-14 rounded-lg bg-background-light"></div>
+						<h2 className="text-3xl font-bold text-text-primary">Bitraider</h2>
 					</div>
-
-					<h1 className="text-5xl font-extrabold tracking-tight text-text-primary md:text-6xl lg:text-7xl">
-						Искусственный интеллект для{' '}
+					<h1 className="text-6xl font-extrabold tracking-tight text-text-primary">
+						Искусственный интеллект для <br />
 						<span className="bg-gradient-to-r from-brand-blue to-brand-purple bg-clip-text text-transparent">
-							приумножения
+							приумножения <br />
 						</span>{' '}
 						вашего капитала
 					</h1>
-
 					<p className="mt-6 max-w-2xl text-lg leading-8 text-text-secondary">
 						Наш торговый AI-бот в Telegram анализирует тысячи источников данных 24/7, чтобы вы
 						получали стабильный доход на автопилоте.
 					</p>
-
 					<div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
 						<button
 							onClick={handleGoToBot}
@@ -58,11 +56,9 @@ export const MainSection = () => {
 					</div>
 				</div>
 
-				<div className="flex flex-1 justify-center lg:justify-end">
-					<div className="relative h-96 w-full max-w-md rounded-xl bg-background-light shadow-2xl shadow-black/30">
-						<div className="absolute inset-0 flex items-center justify-center">
-							<p className="text-2xl font-semibold text-text-secondary">Здесь будет картинка</p>
-						</div>
+				<div className="flex justify-center">
+					<div className="h-[500px] w-[500px] cursor-grab active:cursor-grabbing">
+						<NeuralSphereAnimation />
 					</div>
 				</div>
 			</div>

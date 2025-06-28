@@ -1,7 +1,7 @@
 import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
-import { AnimatedSection } from '../../../home';
-import { LandingSections, partnershipData } from '../../constants';
+import { AnimatedSection } from '../../../../home';
+import { LandingSections, partnershipData } from '../../../constants';
 
 const draw: Variants = {
 	hidden: { pathLength: 0, opacity: 0 },

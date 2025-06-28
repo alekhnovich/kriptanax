@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { AboutSection } from './about-section.component';
-import { FaqSection } from './faq-section.component';
-import { HowItWorksSection } from './how-it-works.component';
-import { InvestmentCalculatorSection } from './investment-calculator.component';
-import { MainSection } from './main-section.component';
-import { PartnershipSection } from './partnership-section.component';
-import { RoadmapSection } from './roadmap-section.component';
+import {
+	AboutSection,
+	FaqSection,
+	HowItWorksSection,
+	InvestmentCalculatorSection,
+	MainSection,
+	PartnershipSection,
+	RoadmapSection,
+} from './landing-sections';
 
 const LandingPage = () => {
 	const pageContentWrapperRef = useRef<HTMLDivElement>(null);

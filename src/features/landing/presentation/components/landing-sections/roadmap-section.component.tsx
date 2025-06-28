@@ -1,7 +1,7 @@
 import { motion, type Variants } from 'framer-motion';
 import { CheckCircle, Circle, CircleDot } from 'lucide-react';
-import { AnimatedSection } from '../../../home';
-import { LandingSections, roadmapData } from '../../constants';
+import { AnimatedSection } from '../../../../home';
+import { LandingSections, roadmapData } from '../../../constants';
 
 const StatusIcon = ({ status }: { status: string }) => {
 	switch (status) {

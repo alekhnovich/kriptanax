@@ -1,5 +1,5 @@
-import { AnimatedSection } from '../../../home';
-import { howItWorksData, LandingSections } from '../../constants';
+import { AnimatedSection } from '../../../../home';
+import { howItWorksData, LandingSections } from '../../../constants';
 
 export const HowItWorksSection = () => {
 	return (

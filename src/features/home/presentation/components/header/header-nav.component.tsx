@@ -3,7 +3,7 @@ import { HeaderNavItem } from './header-nav-item.component';
 
 export const HeaderNav = () => {
 	return (
-		<nav className="flex flex-row items-center gap-[30px]">
+		<nav className="flex flex-row items-center gap-[20px]">
 			<HeaderNavItem
 				navOptions={{
 					...LandingSections.aboutProject,

@@ -1,6 +1,5 @@
-import { AnimatedSection } from '../../../home';
-import { LandingSections } from '../../constants';
-import { aboutSectionData } from '../../constants/about.constants';
+import { AnimatedSection } from '../../../../home';
+import { aboutSectionData, LandingSections } from '../../../constants';
 
 export const AboutSection = () => {
 	return (
