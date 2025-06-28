@@ -1,6 +1,6 @@
 import {
-	type CandlestickData,
 	createChart,
+	type CandlestickData,
 	type IChartApi,
 	type ISeriesApi,
 	type SeriesMarker,
@@ -22,13 +22,15 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 	const chartRef = useRef<IChartApi | null>(null);
 	const seriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
 
-	// Эффект для создания и уничтожения графика. Выполняется один раз.
 	useEffect(() => {
 		if (!chartContainerRef.current) return;
 
-		chartRef.current = createChart(chartContainerRef.current, {
+		const chart = createChart(chartContainerRef.current, {
+			handleScroll: false,
+			handleScale: false,
+
 			width: chartContainerRef.current.clientWidth,
-			height: 600,
+			height: chartContainerRef.current.clientHeight,
 			layout: {
 				background: { color: '#1a1e26' },
 				textColor: 'rgba(235, 235, 245, 0.8)',
@@ -37,16 +39,16 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 				vertLines: { color: 'rgba(70, 130, 180, 0.1)' },
 				horzLines: { color: 'rgba(70, 130, 180, 0.1)' },
 			},
-			crosshair: { mode: 1 },
-			rightPriceScale: { borderColor: 'rgba(197, 203, 206, 0.4)' },
 			timeScale: {
 				borderColor: 'rgba(197, 203, 206, 0.4)',
 				timeVisible: true,
 				secondsVisible: false,
 			},
+			crosshair: { mode: 1 },
+			rightPriceScale: { borderColor: 'rgba(197, 203, 206, 0.4)' },
 		});
-
-		seriesRef.current = chartRef.current.addCandlestickSeries({
+		chartRef.current = chart;
+		seriesRef.current = chart.addCandlestickSeries({
 			upColor: '#26a69a',
 			downColor: '#ef5350',
 			borderDownColor: '#ef5350',
@@ -57,11 +59,14 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 
 		const handleResize = () => {
 			if (chartRef.current && chartContainerRef.current) {
-				chartRef.current.applyOptions({ width: chartContainerRef.current.clientWidth });
+				chartRef.current.resize(
+					chartContainerRef.current.clientWidth,
+					chartContainerRef.current.clientHeight,
+				);
+				chartRef.current.timeScale().fitContent();
 			}
 		};
 		window.addEventListener('resize', handleResize);
-
 		return () => {
 			window.removeEventListener('resize', handleResize);
 			if (chartRef.current) {
@@ -70,26 +75,18 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 		};
 	}, []);
 
-	// Эффект для обновления данных на графике.
 	useEffect(() => {
-		// Проверяем, что серия создана и данные не пустые.
 		if (!seriesRef.current || !data) return;
 
-		// ИСПРАВЛЕНИЕ: Добавлен блок try...catch для защиты от сбоя приложения
 		try {
 			seriesRef.current.setData(data);
 			seriesRef.current.setMarkers(markers);
 
-			// Автомасштабирование только если есть данные
 			if (data.length > 0) {
 				chartRef.current?.timeScale().fitContent();
 			}
 		} catch (error) {
-			console.error(
-				'Ошибка при обновлении данных графика (возможно, они не отсортированы):',
-				error,
-			);
-			console.error('Данные, которые вызвали ошибку:', data);
+			console.error('Ошибка при обновлении данных графика:', error);
 		}
 	}, [data, markers]);
 

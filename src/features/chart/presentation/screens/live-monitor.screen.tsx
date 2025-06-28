@@ -2,7 +2,7 @@ import { motion, type Variants } from 'framer-motion';
 import type { UTCTimestamp } from 'lightweight-charts';
 import { useEffect, useState } from 'react';
 import { FaArrowTrendUp } from 'react-icons/fa6';
-import type { ApiResponse, StatsData } from '../../types';
+import type { ApiResponse, ApiStatsResponse, StatsData } from '../../types';
 import { AssetInfo, StatCard, TradingChart, type ChartData, type MarkerData } from '../components';
 
 export const LiveMonitorPage = () => {
@@ -16,12 +16,26 @@ export const LiveMonitorPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const apiUrl = `${import.meta.env.VITE_API_ENDPOINT}?topTradesCount=3`;
-				const response = await fetch(apiUrl);
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
+				const chartApiUrl = `${import.meta.env.VITE_API_ENDPOINT}?topTradesCount=3`;
+				const statsApiUrl = '/api/v1/statistics/summary';
+
+				const [chartResponse, statsResponse] = await Promise.all([
+					fetch(chartApiUrl),
+					fetch(statsApiUrl),
+				]);
+
+				if (!chartResponse.ok) {
+					throw new Error(`Chart API error! status: ${chartResponse.status}`);
 				}
-				const apiResponse: ApiResponse = await response.json();
+				if (!statsResponse.ok) {
+					throw new Error(`Stats API error! status: ${statsResponse.status}`);
+				}
+
+				const [apiResponse, apiStats]: [ApiResponse, ApiStatsResponse] = await Promise.all([
+					chartResponse.json(),
+					statsResponse.json(),
+				]);
+
 				setExchange(apiResponse.exchange);
 				setSymbol(apiResponse.symbol);
 
@@ -58,14 +72,13 @@ export const LiveMonitorPage = () => {
 				setChartData(newChartData);
 				setMarkers(newMarkers);
 
-				if (!stats) {
-					setStats({
-						earnedToday: 4820.51,
-						earnedWeek: 31560.89,
-						earnedTotal: 987450.23,
-						avgProfit30d: 1.87,
-					});
-				}
+				const newStats: StatsData = {
+					earnedToday: apiStats.todayAmount,
+					earnedWeek: apiStats.weekAmount,
+					earnedTotal: apiStats.allTimeAmount,
+					avgProfit30d: apiStats.averageGrowthPercent30Days,
+				};
+				setStats(newStats);
 			} catch (error) {
 				console.error('Ошибка при получении данных с API:', error);
 			} finally {

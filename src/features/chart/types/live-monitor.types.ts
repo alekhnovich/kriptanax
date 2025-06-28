@@ -26,3 +26,10 @@ export interface StatsData {
 	earnedTotal: number;
 	avgProfit30d: number;
 }
+
+export interface ApiStatsResponse {
+	todayAmount: number;
+	weekAmount: number;
+	allTimeAmount: number;
+	averageGrowthPercent30Days: number;
+}
