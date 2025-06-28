@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { useState } from 'react';
+import { AnimatedSection } from '../../../home';
 import { LandingSections, partnershipData } from '../../constants';
 
 const draw: Variants = {
@@ -36,7 +37,7 @@ export const PartnershipSection = () => {
 	};
 
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.partnershipProgram.id}
 			className="w-full overflow-hidden bg-background-light py-20 sm:py-28"
 		>
@@ -396,6 +397,6 @@ export const PartnershipSection = () => {
 					</div>
 				</motion.div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

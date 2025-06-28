@@ -1,8 +1,9 @@
+import { AnimatedSection } from '../../../home';
 import { howItWorksData, LandingSections } from '../../constants';
 
 export const HowItWorksSection = () => {
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.howItWorks.id}
 			className="relative w-full overflow-hidden bg-background-light py-20 sm:py-28"
 		>
@@ -39,6 +40,6 @@ export const HowItWorksSection = () => {
 					})}
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

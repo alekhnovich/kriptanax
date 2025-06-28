@@ -7,5 +7,4 @@ export * from './landing-page.component';
 export * from './landing-page.lazy.component';
 export * from './main-section.component';
 export * from './partnership-section.component';
-export * from './reviews-section.component';
 export * from './roadmap-section.component';

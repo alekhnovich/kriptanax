@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatedSection } from '../../../home';
 import { faqData } from '../../types';
 import { FaqItem } from './faq-item.component';
 
@@ -10,7 +11,7 @@ export const FaqSection = () => {
 	};
 
 	return (
-		<section id="faq" className="relative w-full overflow-hidden py-20 sm:py-28">
+		<AnimatedSection id="faq" className="relative w-full overflow-hidden py-20 sm:py-28">
 			<div aria-hidden="true" className="aurora-layer" />
 			<div className="container relative z-10 mx-auto max-w-7xl px-4">
 				<h2 className="text-center text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
@@ -28,6 +29,6 @@ export const FaqSection = () => {
 					))}
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

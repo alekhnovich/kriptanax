@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { APP_ROUTES } from '../../../../core';
+import { AnimatedSection } from '../../../home';
 import { LandingSections } from '../../constants';
 
 export const MainSection = () => {
@@ -13,7 +14,7 @@ export const MainSection = () => {
 	};
 
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.aboutProject.id}
 			className="w-full bg-background-dark pt-32 sm:pt-40"
 		>
@@ -65,6 +66,6 @@ export const MainSection = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

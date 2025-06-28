@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatedNumber } from '../../../../core/presentation';
+import { AnimatedSection } from '../../../home';
 import { LandingSections } from '../../constants';
 
 const MIN_INVESTMENT = 20;
@@ -40,7 +41,7 @@ export const InvestmentCalculatorSection = () => {
 	};
 
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.incomeCalculator.id}
 			className="w-full bg-background-dark py-20 sm:py-28"
 		>
@@ -123,6 +124,6 @@ export const InvestmentCalculatorSection = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

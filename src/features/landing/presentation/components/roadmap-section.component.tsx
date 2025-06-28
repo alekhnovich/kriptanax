@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { CheckCircle, Circle, CircleDot } from 'lucide-react';
+import { AnimatedSection } from '../../../home';
 import { LandingSections, roadmapData } from '../../constants';
 
 const StatusIcon = ({ status }: { status: string }) => {
@@ -31,7 +32,7 @@ const cardVariants: Variants = {
 
 export const RoadmapSection = () => {
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.developmentPlan.id}
 			className="w-full bg-background-dark py-20 sm:py-28"
 		>
@@ -79,6 +80,6 @@ export const RoadmapSection = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };

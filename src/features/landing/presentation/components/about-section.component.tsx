@@ -1,9 +1,10 @@
+import { AnimatedSection } from '../../../home';
 import { LandingSections } from '../../constants';
 import { aboutSectionData } from '../../constants/about.constants';
 
 export const AboutSection = () => {
 	return (
-		<section
+		<AnimatedSection
 			id={LandingSections.aboutUs.id}
 			className="section-anchor relative w-full overflow-hidden bg-background-dark py-20 sm:py-28"
 		>
@@ -40,6 +41,6 @@ export const AboutSection = () => {
 					})}
 				</div>
 			</div>
-		</section>
+		</AnimatedSection>
 	);
 };
