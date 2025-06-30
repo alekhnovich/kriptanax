@@ -189,3 +189,12 @@
 		transform: translate(-15%, -10%) rotate(-40deg);
 	}
 }
+
+.roadmap-gradient-line {
+	background: linear-gradient(
+		to bottom,
+		theme('colors.brand-blue'),
+		theme('colors.brand-purple'),
+		transparent
+	);
+}

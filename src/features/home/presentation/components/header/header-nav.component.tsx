@@ -1,44 +1,20 @@
 import { LandingSections } from '../../../../landing';
 import { HeaderNavItem } from './header-nav-item.component';
 
-export const HeaderNav = () => {
+interface HeaderNavProps {
+	onNavItemClick?: () => void;
+}
+
+export const HeaderNav = ({ onNavItemClick }: HeaderNavProps) => {
 	return (
-		<nav className="flex flex-row items-center gap-[20px]">
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.aboutProject,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.aboutUs,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.incomeCalculator,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.howItWorks,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.developmentPlan,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.partnershipProgram,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.faq,
-				}}
-			/>
+		<nav className="flex w-full flex-col items-start gap-2 md:w-auto md:flex-row md:items-center md:gap-2">
+			<HeaderNavItem navOptions={LandingSections.aboutProject} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.aboutUs} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.incomeCalculator} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.howItWorks} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.developmentPlan} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.partnershipProgram} onClick={onNavItemClick} />
+			<HeaderNavItem navOptions={LandingSections.faq} onClick={onNavItemClick} />
 		</nav>
 	);
 };

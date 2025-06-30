@@ -1,7 +1,9 @@
 import { motion, type Variants } from 'framer-motion';
 import type { UTCTimestamp } from 'lightweight-charts';
 import { useEffect, useState } from 'react';
-import { FaArrowTrendUp } from 'react-icons/fa6';
+import { FaArrowLeft, FaArrowTrendUp } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+import { APP_ROUTES } from '../../../../core';
 import type { ApiResponse, ApiStatsResponse, StatsData } from '../../types';
 import { AssetInfo, StatCard, TradingChart, type ChartData, type MarkerData } from '../components';
 
@@ -124,6 +126,15 @@ export const LiveMonitorPage = () => {
 		<main className="relative min-h-screen w-full overflow-hidden bg-background-dark p-4 text-text-primary sm:p-6 lg:p-8">
 			<div className="background-glow-container"></div>
 			<div className="container relative z-10 mx-auto max-w-screen-2xl">
+				<motion.div variants={containerVariants} initial="hidden" animate="visible" custom={0}>
+					<Link
+						to={APP_ROUTES.landing.route}
+						className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-text-primary"
+					>
+						<FaArrowLeft />
+						<span>Назад на главную</span>
+					</Link>
+				</motion.div>
 				<motion.header
 					className="mb-8"
 					variants={containerVariants}
@@ -131,7 +142,9 @@ export const LiveMonitorPage = () => {
 					animate="visible"
 					custom={1}
 				>
-					<h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">AI Live Monitor</h1>
+					<h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+						Bitraider Live Monitor
+					</h1>
 					<p className="mt-2 text-lg text-text-secondary">
 						Данные обновляются каждые 30 секунд, демонстрируя случайный актив в работе.
 					</p>

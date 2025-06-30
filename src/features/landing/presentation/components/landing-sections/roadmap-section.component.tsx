@@ -32,11 +32,18 @@ const cardVariants: Variants = {
 
 export const RoadmapSection = () => {
 	return (
+		// 1. Добавлен класс "relative", чтобы фон позиционировался относительно этой секции
 		<AnimatedSection
 			id={LandingSections.developmentPlan.id}
-			className="w-full bg-background-dark py-20 sm:py-28"
+			className="relative w-full overflow-hidden bg-background-dark py-20 sm:py-28"
 		>
-			<div className="container mx-auto max-w-screen-xl px-4">
+			{/* 2. Новый элемент для создания фонового свечения */}
+			<div
+				aria-hidden="true"
+				className="bg-gradient-radial absolute left-1/2 top-0 h-2/3 w-full -translate-x-1/2 from-brand-purple/10 to-transparent blur-3xl"
+			/>
+
+			<div className="container relative mx-auto max-w-screen-xl px-4">
 				<div className="mx-auto max-w-3xl text-center">
 					<h2 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
 						{roadmapData.title}

@@ -9,9 +9,10 @@ interface HeaderNavItemProps {
 		text: string;
 		id: string;
 	};
+	onClick?: () => void;
 }
 
-export const HeaderNavItem = ({ navOptions }: HeaderNavItemProps) => {
+export const HeaderNavItem = ({ navOptions, onClick }: HeaderNavItemProps) => {
 	const { pathname } = useLocation();
 	const [search, setSearch] = useSearchParams();
 	const navigate = useAppNavigate();
@@ -19,31 +20,37 @@ export const HeaderNavItem = ({ navOptions }: HeaderNavItemProps) => {
 
 	const style = useMemo(() => {
 		const isFirstSectionActive =
-			pathname.startsWith(APP_ROUTES.landing.route) &&
+			(pathname === APP_ROUTES.landing.route || pathname === '/') &&
 			!currentId &&
 			navOptions.id === LandingSections.aboutProject.id;
 
 		const isActive = isFirstSectionActive || navOptions.id === currentId;
 
 		return twMerge(
-			'cursor-pointer rounded-full px-4 py-2 text-sm font-semibold text-text-secondary transition-all duration-200 hover:bg-white/10 hover:text-text-primary',
+			'w-full cursor-pointer rounded-full px-4 py-2 text-left text-sm font-semibold text-text-secondary transition-all duration-200 hover:bg-white/10 hover:text-text-primary md:w-auto md:text-center',
 			isActive ? 'bg-white/10 text-text-primary' : '',
 		);
 	}, [currentId, pathname, navOptions.id]);
 
 	const handleClick = () => {
-		if (navOptions.id === LandingSections.chart.id) {
+		if (onClick) {
+			onClick();
+		}
+
+		if (navOptions.id === 'chart') {
 			navigate(APP_ROUTES.chart.route);
 			return;
 		}
-		const element = document.getElementById(navOptions.id);
-		if (element) {
-			element.scrollIntoView({
-				behavior: 'smooth',
-				block: 'start',
-			});
+
+		if (pathname === APP_ROUTES.landing.route || pathname === '/') {
+			const element = document.getElementById(navOptions.id);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
+			setSearch({ sectionId: navOptions.id }, { replace: true });
+		} else {
+			navigate(`${APP_ROUTES.landing.route}?sectionId=${navOptions.id}`);
 		}
-		setSearch({ sectionId: navOptions.id }, { replace: true });
 	};
 
 	return (
