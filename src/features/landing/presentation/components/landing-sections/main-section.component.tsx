@@ -17,15 +17,15 @@ export const MainSection = () => {
 	return (
 		<AnimatedSection
 			id={LandingSections.aboutProject.id}
-			className="w-full bg-background-dark pt-24 lg:pt-[90px]"
+			className="w-full bg-background-dark pt-24 lg:pt-[140px]"
 		>
-			<div className="container mx-auto flex max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
+			<div className="container mx-auto mb-[30px] flex max-w-6xl flex-col items-center gap-12 px-4 lg:flex-row lg:items-center lg:justify-center lg:gap-16">
 				<div className="flex flex-col items-center text-center lg:items-start lg:text-left">
 					<div className="mb-4 flex items-center gap-4">
 						<img src="/logo.svg" alt="Bitraider Logo" className="h-12 w-12 sm:h-14 sm:w-14" />
 						<h2 className="text-2xl font-bold text-text-primary sm:text-3xl">Bitraider</h2>
 					</div>
-					<h1 className="text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
+					<h1 className="text-4xl font-extrabold tracking-tight text-text-primary sm:text-5xl lg:text-7xl">
 						Искусственный интеллект для <br className="hidden sm:block" />
 						<span className="bg-gradient-to-r from-brand-blue to-brand-purple bg-clip-text text-transparent">
 							приумножения

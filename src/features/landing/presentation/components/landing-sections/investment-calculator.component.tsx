@@ -55,25 +55,28 @@ export const InvestmentCalculatorSection = () => {
 	return (
 		<AnimatedSection
 			id={LandingSections.incomeCalculator.id}
-			className="w-full bg-background-dark py-20 sm:py-28"
+			className="w-full bg-background-dark py-16 sm:py-24"
 		>
 			<div className="container mx-auto max-w-screen-lg px-4">
 				<div className="mx-auto max-w-3xl text-center">
-					<h2 className="text-4xl font-extrabold text-text-primary sm:text-5xl">
+					<h2 className="text-3xl font-extrabold text-text-primary sm:text-4xl lg:text-5xl">
 						Рассчитайте вашу{' '}
 						<span className="bg-gradient-to-r from-brand-blue to-brand-purple bg-clip-text text-transparent">
 							потенциальную прибыль
 						</span>
 					</h2>
-					<p className="mt-6 text-lg leading-8 text-text-secondary">
+					<p className="mt-6 text-base leading-7 text-text-secondary lg:text-lg lg:leading-8">
 						Узнайте, сколько вы можете зарабатывать каждый день и месяц, инвестируя с нашим
 						AI-ботом.
 					</p>
 				</div>
 
-				<div className="calculator-glow mx-auto mt-16 max-w-3xl rounded-2xl border border-border-color bg-background-light p-8 shadow-2xl shadow-black/20">
+				<div className="calculator-glow mx-auto mt-16 max-w-3xl rounded-2xl border border-border-color bg-background-light p-6 shadow-2xl shadow-black/20 sm:p-8">
 					<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-						<label htmlFor="investment" className="text-lg font-medium text-text-primary">
+						<label
+							htmlFor="investment"
+							className="text-base font-medium text-text-primary sm:text-lg"
+						>
 							Сумма инвестиций, $
 						</label>
 						<div className="relative">
@@ -110,7 +113,7 @@ export const InvestmentCalculatorSection = () => {
 									clipRule="evenodd"
 								/>
 							</svg>
-							<div className="absolute bottom-full left-1/2 mb-2 w-64 -translate-x-1/2 transform rounded-lg bg-gray-700 p-3 text-center text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+							<div className="absolute bottom-full left-1/2 z-20 mb-2 w-56 -translate-x-1/2 transform rounded-lg bg-gray-700 p-3 text-center text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 sm:w-64">
 								Сложный процент означает, что ваша ежедневная прибыль реинвестируется, и на
 								следующий день процент начисляется на увеличенную сумму. Это ускоряет рост вашего
 								капитала.
@@ -154,13 +157,13 @@ export const InvestmentCalculatorSection = () => {
 					<div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-2">
 						<div className="rounded-lg bg-background-dark p-6">
 							<p className="text-base text-text-secondary">Прибыль в день</p>
-							<p className="text-4xl font-bold text-text-primary">
+							<p className="text-3xl font-bold text-text-primary sm:text-4xl">
 								$<AnimatedNumber value={dailyProfit} />
 							</p>
 						</div>
 						<div className="rounded-lg bg-background-dark p-6">
 							<p className="text-base text-text-secondary">Прибыль в месяц</p>
-							<p className="text-4xl font-bold text-text-primary">
+							<p className="text-3xl font-bold text-text-primary sm:text-4xl">
 								$<AnimatedNumber value={monthlyProfit} />
 							</p>
 						</div>
@@ -169,7 +172,7 @@ export const InvestmentCalculatorSection = () => {
 					<div className="mt-10 text-center">
 						<button
 							onClick={handleGoToBot}
-							className="transform rounded-lg bg-brand-blue px-10 py-4 text-lg font-semibold text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-opacity-50"
+							className="transform rounded-lg bg-brand-blue px-8 py-3 text-base font-semibold text-white shadow-lg transition-transform duration-200 hover:scale-105 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-opacity-50 sm:px-10 sm:py-4 sm:text-lg"
 						>
 							Получить прибыль
 						</button>
