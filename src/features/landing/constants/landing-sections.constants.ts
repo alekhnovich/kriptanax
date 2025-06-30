@@ -27,12 +27,8 @@ export const LandingSections: {
 		id: 'partnership_program_section_id',
 		text: 'Партнёрская программа',
 	},
-	reviews: {
-		id: 'reviews_section_id',
-		text: 'Отзывы',
-	},
-	chart: {
-		id: 'chart_section_id',
-		text: 'График',
+	faq: {
+		id: 'faq_section_id',
+		text: 'Ответы на вопросы',
 	},
 };

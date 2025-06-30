@@ -36,12 +36,7 @@ export const HeaderNav = () => {
 			/>
 			<HeaderNavItem
 				navOptions={{
-					...LandingSections.reviews,
-				}}
-			/>
-			<HeaderNavItem
-				navOptions={{
-					...LandingSections.chart,
+					...LandingSections.faq,
 				}}
 			/>
 		</nav>
