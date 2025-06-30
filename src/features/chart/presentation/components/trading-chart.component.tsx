@@ -28,24 +28,24 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 		const chart = createChart(chartContainerRef.current, {
 			handleScroll: false,
 			handleScale: false,
-
 			width: chartContainerRef.current.clientWidth,
 			height: chartContainerRef.current.clientHeight,
 			layout: {
-				background: { color: '#1a1e26' },
-				textColor: 'rgba(235, 235, 245, 0.8)',
+				background: { color: '#161B22' },
+				textColor: '#8B949E',
+				fontSize: 12,
 			},
 			grid: {
-				vertLines: { color: 'rgba(70, 130, 180, 0.1)' },
-				horzLines: { color: 'rgba(70, 130, 180, 0.1)' },
+				vertLines: { color: '#30363D' },
+				horzLines: { color: '#30363D' },
 			},
 			timeScale: {
-				borderColor: 'rgba(197, 203, 206, 0.4)',
+				borderColor: '#30363D',
 				timeVisible: true,
 				secondsVisible: false,
 			},
 			crosshair: { mode: 1 },
-			rightPriceScale: { borderColor: 'rgba(197, 203, 206, 0.4)' },
+			rightPriceScale: { borderColor: '#30363D' },
 		});
 		chartRef.current = chart;
 		seriesRef.current = chart.addCandlestickSeries({
@@ -77,11 +77,9 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 
 	useEffect(() => {
 		if (!seriesRef.current || !data) return;
-
 		try {
 			seriesRef.current.setData(data);
 			seriesRef.current.setMarkers(markers);
-
 			if (data.length > 0) {
 				chartRef.current?.timeScale().fitContent();
 			}
@@ -90,5 +88,5 @@ export const TradingChart = ({ data, markers }: TradingChartProps) => {
 		}
 	}, [data, markers]);
 
-	return <div ref={chartContainerRef} className="h-[600px] w-full" />;
+	return <div ref={chartContainerRef} className="h-full w-full" />;
 };

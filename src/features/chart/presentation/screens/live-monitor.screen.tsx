@@ -123,7 +123,7 @@ export const LiveMonitorPage = () => {
 	};
 
 	return (
-		<main className="relative min-h-screen w-full overflow-hidden bg-background-dark p-4 text-text-primary sm:p-6 lg:p-8">
+		<main className="relative min-h-screen w-full overflow-y-auto bg-background-dark p-4 text-text-primary sm:p-6 lg:p-8">
 			<div className="background-glow-container"></div>
 			<div className="container relative z-10 mx-auto max-w-screen-2xl">
 				<motion.div variants={containerVariants} initial="hidden" animate="visible" custom={0}>
@@ -136,23 +136,23 @@ export const LiveMonitorPage = () => {
 					</Link>
 				</motion.div>
 				<motion.header
-					className="mb-8"
+					className="mb-6 sm:mb-8"
 					variants={containerVariants}
 					initial="hidden"
 					animate="visible"
 					custom={1}
 				>
-					<h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+					<h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
 						Bitraider Live Monitor
 					</h1>
-					<p className="mt-2 text-lg text-text-secondary">
+					<p className="mt-2 text-base text-text-secondary lg:text-lg">
 						Данные обновляются каждые 30 секунд, демонстрируя случайный актив в работе.
 					</p>
 				</motion.header>
 
 				<div className="flex flex-col gap-8 lg:flex-row">
 					<motion.div
-						className="min-h-[640px] flex-[3] rounded-xl border border-border-color bg-background-light p-2 shadow-2xl shadow-black/30 sm:p-4"
+						className="min-h-[450px] rounded-xl border border-border-color bg-background-light p-2 shadow-2xl shadow-black/30 sm:p-4 lg:min-h-[640px] lg:flex-[3]"
 						variants={containerVariants}
 						initial="hidden"
 						animate="visible"
@@ -170,7 +170,7 @@ export const LiveMonitorPage = () => {
 					</motion.div>
 
 					<motion.aside
-						className="flex flex-[1] flex-col gap-6"
+						className="flex flex-col gap-6 lg:flex-[1]"
 						variants={containerVariants}
 						initial="hidden"
 						animate="visible"
@@ -182,8 +182,10 @@ export const LiveMonitorPage = () => {
 							<AssetInfo exchange={exchange} formattedSymbol={formattedSymbol} />
 						)}
 
-						<div className="rounded-xl border border-border-color bg-background-light p-6 shadow-lg">
-							<h2 className="mb-6 text-2xl font-bold text-text-primary">Общая статистика</h2>
+						<div className="rounded-xl border border-border-color bg-background-light p-4 shadow-lg sm:p-6">
+							<h2 className="mb-4 text-xl font-bold text-text-primary sm:mb-6 sm:text-2xl">
+								Общая статистика
+							</h2>
 
 							{isLoading || !stats ? (
 								<div className="space-y-4">
