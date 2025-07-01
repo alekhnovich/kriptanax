@@ -1,18 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { HomeHeader } from '../../../home';
 import { LandingPage } from '../components';
 
 export const LandingScreen = () => {
-	const pageContentWrapperRef = useRef<HTMLDivElement | null>(null);
+	const [pageNode, setPageNode] = useState<HTMLDivElement | null>(null);
 	const [, setSearch] = useSearchParams();
 	const isNavigatingByClick = useRef(false);
 	const scrollTimeout = useRef<number | null>(null);
 
+	const pageContentWrapperRef = useCallback((node: HTMLDivElement | null) => {
+		if (node !== null) {
+			setPageNode(node);
+		}
+	}, []);
+
 	useEffect(() => {
+		if (!pageNode) {
+			return;
+		}
 		const options = {
 			root: null,
-			rootMargin: '-40% 0px -40% 0px',
+			rootMargin: '-50% 0px -50% 0px',
 			threshold: 0,
 		};
 		const observerCallback: IntersectionObserverCallback = (entries) => {
@@ -27,8 +36,7 @@ export const LandingScreen = () => {
 		};
 
 		const observer = new IntersectionObserver(observerCallback, options);
-		const node = pageContentWrapperRef.current;
-		const sections = node?.querySelectorAll('section[id]');
+		const sections = pageNode.querySelectorAll('section[id]');
 		if (sections) {
 			sections.forEach((section) => observer.observe(section));
 		}
@@ -41,24 +49,21 @@ export const LandingScreen = () => {
 				clearTimeout(scrollTimeout.current);
 			}
 		};
-	}, [pageContentWrapperRef.current, setSearch]);
+	}, [pageNode, setSearch]);
 
 	const handleNavClick = (sectionId: string) => {
 		isNavigatingByClick.current = true;
 		const element = document.getElementById(sectionId);
-
 		if (element) {
-			element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			setSearch({ sectionId }, { replace: true });
+			element.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}
-
 		if (scrollTimeout.current) {
 			clearTimeout(scrollTimeout.current);
 		}
-
 		scrollTimeout.current = window.setTimeout(() => {
+			setSearch({ sectionId }, { replace: true });
 			isNavigatingByClick.current = false;
-		}, 1000);
+		}, 800);
 	};
 
 	return (
