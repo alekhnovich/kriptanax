@@ -3,13 +3,19 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { HeaderNav } from './header-nav.component';
 
-export const HomeHeader = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
+interface HomeHeaderProps {
+	onNavItemClick: (sectionId: string) => void;
+}
 
+export const HomeHeader = ({ onNavItemClick }: HomeHeaderProps) => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const iconVariants = {
 		hidden: { rotate: -180, scale: 0 },
 		visible: { rotate: 0, scale: 1, transition: { duration: 0.3 } },
 		exit: { rotate: 180, scale: 0, transition: { duration: 0.3 } },
+	};
+	const handleMobileMenuClick = () => {
+		setIsMenuOpen(false);
 	};
 
 	return (
@@ -22,7 +28,7 @@ export const HomeHeader = () => {
 					</div>
 
 					<div className="hidden pr-2 md:flex">
-						<HeaderNav />
+						<HeaderNav onNavItemClick={onNavItemClick} />
 					</div>
 
 					<div className="flex items-center md:hidden">
@@ -70,7 +76,7 @@ export const HomeHeader = () => {
 						transition={{ duration: 0.2 }}
 						className="absolute top-full mt-2 w-full max-w-sm rounded-2xl border border-border-color bg-background-light/95 p-4 shadow-xl backdrop-blur-xl md:hidden"
 					>
-						<HeaderNav onNavItemClick={() => setIsMenuOpen(false)} />
+						<HeaderNav onNavItemClick={onNavItemClick} onItemClick={handleMobileMenuClick} />
 					</motion.div>
 				)}
 			</AnimatePresence>

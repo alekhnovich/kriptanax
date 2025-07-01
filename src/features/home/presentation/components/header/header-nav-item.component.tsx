@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
-import { APP_ROUTES, useAppNavigate } from '../../../../../core';
+import { APP_ROUTES } from '../../../../../core';
 import { LandingSections } from '../../../../landing';
 
 interface HeaderNavItemProps {
@@ -9,13 +9,13 @@ interface HeaderNavItemProps {
 		text: string;
 		id: string;
 	};
+	onNavigate: (sectionId: string) => void;
 	onClick?: () => void;
 }
 
-export const HeaderNavItem = ({ navOptions, onClick }: HeaderNavItemProps) => {
+export const HeaderNavItem = ({ navOptions, onNavigate, onClick }: HeaderNavItemProps) => {
 	const { pathname } = useLocation();
-	const [search, setSearch] = useSearchParams();
-	const navigate = useAppNavigate();
+	const [search] = useSearchParams();
 	const currentId = search.get('sectionId');
 
 	const style = useMemo(() => {
@@ -36,21 +36,7 @@ export const HeaderNavItem = ({ navOptions, onClick }: HeaderNavItemProps) => {
 		if (onClick) {
 			onClick();
 		}
-
-		if (navOptions.id === 'chart') {
-			navigate(APP_ROUTES.chart.route);
-			return;
-		}
-
-		if (pathname === APP_ROUTES.landing.route || pathname === '/') {
-			const element = document.getElementById(navOptions.id);
-			if (element) {
-				element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}
-			setSearch({ sectionId: navOptions.id }, { replace: true });
-		} else {
-			navigate(`${APP_ROUTES.landing.route}?sectionId=${navOptions.id}`);
-		}
+		onNavigate(navOptions.id);
 	};
 
 	return (

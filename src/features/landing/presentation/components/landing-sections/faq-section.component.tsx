@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatedSection } from '../../../../home';
+import { LandingSections } from '../../../constants';
 import { faqData } from '../../../types';
 import { FaqItem } from '../faq-item.component';
 
@@ -12,7 +13,7 @@ export const FaqSection = () => {
 
 	return (
 		<AnimatedSection
-			id="faq"
+			id={LandingSections.faq.id}
 			className="relative w-full overflow-hidden bg-background-dark py-16 sm:py-24"
 		>
 			<div aria-hidden="true" className="aurora-layer" />

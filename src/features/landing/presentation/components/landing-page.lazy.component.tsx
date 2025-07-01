@@ -1,11 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { forwardRef, lazy, Suspense } from 'react';
 
 const ExDefLandingPage = lazy(() => import('./landing-page.component'));
 
-export const LandingPage = () => {
+export const LandingPage = forwardRef<HTMLDivElement>((props, ref) => {
 	return (
-		<Suspense>
-			<ExDefLandingPage />
+		<Suspense fallback={<div>Загрузка...</div>}>
+			<ExDefLandingPage {...props} ref={ref} />
 		</Suspense>
 	);
-};
+});
