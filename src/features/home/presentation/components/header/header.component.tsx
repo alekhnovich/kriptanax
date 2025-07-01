@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { LanguageSelector } from '../../../../landing';
 import { HeaderNav } from './header-nav.component';
 
 interface HomeHeaderProps {
@@ -27,8 +28,10 @@ export const HomeHeader = ({ onNavItemClick }: HomeHeaderProps) => {
 						<span className="text-xl font-bold text-text-primary">Bitraider</span>
 					</div>
 
-					<div className="hidden pr-2 md:flex">
+					<div className="hidden items-center gap-2 pr-2 md:flex">
 						<HeaderNav onNavItemClick={onNavItemClick} />
+						<div className="h-6 w-px bg-border-color/50" />
+						<LanguageSelector />
 					</div>
 
 					<div className="flex items-center md:hidden">
@@ -76,6 +79,9 @@ export const HomeHeader = ({ onNavItemClick }: HomeHeaderProps) => {
 						transition={{ duration: 0.2 }}
 						className="absolute top-full mt-2 w-full max-w-sm rounded-2xl border border-border-color bg-background-light/95 p-4 shadow-xl backdrop-blur-xl md:hidden"
 					>
+						<div className="mb-4 flex justify-center">
+							<LanguageSelector />
+						</div>
 						<HeaderNav onNavItemClick={onNavItemClick} onItemClick={handleMobileMenuClick} />
 					</motion.div>
 				)}

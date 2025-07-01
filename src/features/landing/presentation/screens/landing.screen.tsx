@@ -4,7 +4,7 @@ import { HomeHeader } from '../../../home';
 import { LandingPage } from '../components';
 
 export const LandingScreen = () => {
-	const pageContentWrapperRef = useRef<HTMLDivElement>(null);
+	const pageContentWrapperRef = useRef<HTMLDivElement | null>(null);
 	const [, setSearch] = useSearchParams();
 	const isNavigatingByClick = useRef(false);
 	const scrollTimeout = useRef<number | null>(null);
@@ -27,7 +27,8 @@ export const LandingScreen = () => {
 		};
 
 		const observer = new IntersectionObserver(observerCallback, options);
-		const sections = pageContentWrapperRef.current?.querySelectorAll('section[id]');
+		const node = pageContentWrapperRef.current;
+		const sections = node?.querySelectorAll('section[id]');
 		if (sections) {
 			sections.forEach((section) => observer.observe(section));
 		}
@@ -40,7 +41,7 @@ export const LandingScreen = () => {
 				clearTimeout(scrollTimeout.current);
 			}
 		};
-	}, [setSearch]);
+	}, [pageContentWrapperRef.current, setSearch]);
 
 	const handleNavClick = (sectionId: string) => {
 		isNavigatingByClick.current = true;
