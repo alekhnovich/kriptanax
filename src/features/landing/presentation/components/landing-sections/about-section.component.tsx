@@ -28,14 +28,20 @@ export const AboutSection = () => {
 						return (
 							<div
 								key={index}
-								className="flex flex-col rounded-2xl border border-border-color bg-background-light p-6 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-brand-blue/50 hover:shadow-2xl hover:shadow-brand-blue/10 md:p-8"
+								className="relative flex flex-col overflow-hidden rounded-2xl border border-border-color bg-background-light p-6 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:border-brand-blue/50 hover:shadow-2xl hover:shadow-brand-blue/10 md:p-8"
 							>
-								<div className="flex-shrink-0">
-									<IconComponent />
+								<div aria-hidden="true" className="absolute bottom-0 right-0 z-0 opacity-5">
+									<IconComponent className="h-48 w-48 text-text-primary" />
 								</div>
-								<div className="mt-4 flex-grow">
-									<h3 className="text-xl font-bold text-text-primary">{feature.title}</h3>
-									<p className="mt-3 text-base text-text-secondary">{feature.description}</p>
+
+								<div className="relative z-10 flex h-full flex-col">
+									<div className="flex-shrink-0">
+										<IconComponent className="h-8 w-8 text-brand-blue" />
+									</div>
+									<div className="mt-4 flex-grow">
+										<h3 className="text-xl font-bold text-text-primary">{feature.title}</h3>
+										<p className="mt-3 text-base text-text-secondary">{feature.description}</p>
+									</div>
 								</div>
 							</div>
 						);
